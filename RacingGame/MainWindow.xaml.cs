@@ -42,18 +42,18 @@ namespace RacingGame
             background_position += 10;
 
             Canvas.SetTop( bg_img_down, background_position);
-            Canvas.SetTop( bg_img_up, -638+background_position);
+            Canvas.SetTop( bg_img_up, -636+background_position);
 
-            if (background_position >= 638)
+            if (background_position >= 630)
                 background_position = 0;
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             int speed_car = 16;
-            if ((e.Key == Key.Left || e.Key == Key.A) && Canvas.GetLeft(car) > -10)
+            if ((e.Key == Key.Left || e.Key == Key.A) && Canvas.GetLeft(car) > 110)
                 Canvas.SetLeft(car, Canvas.GetLeft(car) - speed_car);
-            else if ((e.Key == Key.Right || e.Key == Key.D) && Canvas.GetLeft(car) < 708)
+            else if ((e.Key == Key.Right || e.Key == Key.D) && Canvas.GetLeft(car) < 580)
                 Canvas.SetLeft(car, Canvas.GetLeft(car) + speed_car);
 
             if (e.Key == Key.Escape)
