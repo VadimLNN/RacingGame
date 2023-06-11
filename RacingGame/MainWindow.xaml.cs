@@ -50,6 +50,12 @@ namespace RacingGame
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            int speed_car = 16;
+            if ((e.Key == Key.Left || e.Key == Key.A) && Canvas.GetLeft(car) > -10)
+                Canvas.SetLeft(car, Canvas.GetLeft(car) - speed_car);
+            else if ((e.Key == Key.Right || e.Key == Key.D) && Canvas.GetLeft(car) < 708)
+                Canvas.SetLeft(car, Canvas.GetLeft(car) + speed_car);
+
             if (e.Key == Key.Escape)
             {
                 Timer.Stop();

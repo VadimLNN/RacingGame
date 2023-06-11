@@ -9,9 +9,9 @@
         WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown" WindowStyle="None">
     <Grid Height="655">
         <Canvas x:Name="cnv">
-            <Image x:Name="bg_img_down" Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center" Canvas.Top="2" VerticalAlignment="Top"/>
-            <Image x:Name="bg_img_up" Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center" Canvas.Top="-638" VerticalAlignment="Top"/>
-            <Image x:Name="car" Height="128" Width="128" Source="/car_1.png" HorizontalAlignment="Left" Canvas.Left="542" Canvas.Top="455" VerticalAlignment="Top"/>
+            <Image x:Name="bg_img_down" Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center" Canvas.Top="0" VerticalAlignment="Top"/>
+            <Image x:Name="bg_img_up" Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center" Canvas.Top="-640" VerticalAlignment="Top"/>
+            <Image x:Name="car" Height="128" Width="128" Source="/car_1.png" HorizontalAlignment="Center" Canvas.Left="542" Canvas.Top="495" VerticalAlignment="Top"/>
         </Canvas>
 
     </Grid>
