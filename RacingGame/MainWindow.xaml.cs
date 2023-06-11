@@ -38,14 +38,15 @@ namespace RacingGame
 
         // переменная для установки сдвига задних фонов и машин (для анимации)
         int background_speed = 10;
-        int enemy_car_speed = 8;
+        int enemy1_car_speed = 8;
+        int enemy2_car_speed = 7;
         private void Tick(object sender, EventArgs e)
         {
             // сдвиг нижнего и верхнего фона + движение врагов  
             Canvas.SetTop( bg_img_down, (Canvas.GetTop(bg_img_down) + background_speed));
             Canvas.SetTop( bg_img_up,   (Canvas.GetTop(bg_img_up)   + background_speed));
-            Canvas.SetTop( car_enemy_1, (Canvas.GetTop(car_enemy_1) + enemy_car_speed));
-            Canvas.SetTop( car_enemy_2, (Canvas.GetTop(car_enemy_2) + enemy_car_speed));
+            Canvas.SetTop( car_enemy_1, (Canvas.GetTop(car_enemy_1) + enemy1_car_speed));
+            Canvas.SetTop( car_enemy_2, (Canvas.GetTop(car_enemy_2) + enemy2_car_speed));
 
             // перезапуск анимации 
             if (Canvas.GetTop(bg_img_up) >= 0)  
@@ -57,10 +58,17 @@ namespace RacingGame
             // перезапуск движения врагов
             if (Canvas.GetTop(car_enemy_1) >= 640)
             {
-                Canvas.SetTop(car_enemy_1, -622);
-                Canvas.SetTop(car_enemy_2, -622);
+                Canvas.SetTop(car_enemy_1, -322);
+                Random rand = new Random();
+                Canvas.SetLeft(car_enemy_1, rand.Next(110, 580));
             }
 
+            if (Canvas.GetTop(car_enemy_2) >= 640)
+            {
+                Canvas.SetTop(car_enemy_2, -322);
+                Random rand = new Random();
+                Canvas.SetLeft(car_enemy_2, rand.Next(110, 580));
+            }
 
         }
         
