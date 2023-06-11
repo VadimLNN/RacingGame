@@ -31,7 +31,7 @@ namespace RacingGame
 
             //установка интервала между тиками
             //TimeSpan – переменная для хранения времени в формате часы/минуты/секунды
-            Timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            Timer.Interval = new TimeSpan(0, 0, 0, 0, 30);
 
             Timer.Start();
         }
@@ -41,9 +41,10 @@ namespace RacingGame
         {
             background_position += 10;
 
-            Canvas.SetTop( bg_img, background_position);
+            Canvas.SetTop( bg_img_down, background_position);
+            Canvas.SetTop( bg_img_up, -638+background_position);
 
-            if (background_position >= 650)
+            if (background_position >= 638)
                 background_position = 0;
         }
 

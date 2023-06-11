@@ -7,12 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="650" Width="840"
         WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown" WindowStyle="None">
-    <Window.Background>
-        <ImageBrush ImageSource="/bg.png"/>
-    </Window.Background>
     <Grid Height="655">
         <Canvas x:Name="cnv">
-            <Image x:Name="bg_img" Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center" Canvas.Top="2" VerticalAlignment="Top"/>
+            <Image x:Name="bg_img_down" Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center" Canvas.Top="2" VerticalAlignment="Top"/>
+            <Image x:Name="bg_img_up" Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center" Canvas.Top="-638" VerticalAlignment="Top"/>
             <Image x:Name="car" Height="128" Width="128" Source="/car_1.png" HorizontalAlignment="Left" Canvas.Left="542" Canvas.Top="455" VerticalAlignment="Top"/>
         </Canvas>
 
