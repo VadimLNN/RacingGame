@@ -62,5 +62,7 @@ namespace RacingGame
                 this.Close();
             }
         }
+
+        private void Cnv_MouseDown(object sender, MouseButtonEventArgs e) => DragMove();
     }
 }
