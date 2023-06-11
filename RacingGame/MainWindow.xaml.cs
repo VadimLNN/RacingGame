@@ -18,51 +18,72 @@ namespace RacingGame
     public partial class MainWindow : Window
     {
         // создание переменной Таймер
-        System.Windows.Threading.DispatcherTimer Timer;
+        System.Windows.Threading.DispatcherTimer timer;
         public MainWindow()
         {
             InitializeComponent();
 
-            //инициализация переменной таймер
-            Timer = new System.Windows.Threading.DispatcherTimer();
+            // инициализация переменной таймер
+            timer = new System.Windows.Threading.DispatcherTimer();
 
-            //назначение обработчика события Тик
-            Timer.Tick += new EventHandler(Tick);
+            // назначение обработчика события Тик
+            timer.Tick += new EventHandler(Tick);
 
-            //установка интервала между тиками
-            //TimeSpan – переменная для хранения времени в формате часы/минуты/секунды
-            Timer.Interval = new TimeSpan(0, 0, 0, 0, 30);
+            // установка интервала таймера 
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 30);
 
-            Timer.Start();
+            // запуск таймера 
+            timer.Start();
         }
 
-        int background_position = 0;
+        // переменная для установки сдвига задних фонов и машин (для анимации)
+        int background_speed = 10;
+        int enemy_car_speed = 8;
         private void Tick(object sender, EventArgs e)
         {
-            background_position += 10;
+            // сдвиг нижнего и верхнего фона + движение врагов  
+            Canvas.SetTop( bg_img_down, (Canvas.GetTop(bg_img_down) + background_speed));
+            Canvas.SetTop( bg_img_up,   (Canvas.GetTop(bg_img_up)   + background_speed));
+            Canvas.SetTop( car_enemy_1, (Canvas.GetTop(car_enemy_1) + enemy_car_speed));
+            Canvas.SetTop( car_enemy_2, (Canvas.GetTop(car_enemy_2) + enemy_car_speed));
 
-            Canvas.SetTop( bg_img_down, background_position);
-            Canvas.SetTop( bg_img_up, -636+background_position);
+            // перезапуск анимации 
+            if (Canvas.GetTop(bg_img_up) >= 0)  
+                Canvas.SetTop(bg_img_up, -640);
 
-            if (background_position >= 630)
-                background_position = 0;
+            if (Canvas.GetTop(bg_img_down) >= 640)
+                Canvas.SetTop(bg_img_down, 0);
+
+            // перезапуск движения врагов
+            if (Canvas.GetTop(car_enemy_1) >= 640)
+            {
+                Canvas.SetTop(car_enemy_1, -622);
+                Canvas.SetTop(car_enemy_2, -622);
+            }
+
+
         }
-
+        
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            // скорость перемещения машинки в стороны 
             int speed_car = 16;
-            if ((e.Key == Key.Left || e.Key == Key.A) && Canvas.GetLeft(car) > 110)
-                Canvas.SetLeft(car, Canvas.GetLeft(car) - speed_car);
-            else if ((e.Key == Key.Right || e.Key == Key.D) && Canvas.GetLeft(car) < 580)
-                Canvas.SetLeft(car, Canvas.GetLeft(car) + speed_car);
 
+            // ограничения передвижения дорогой 
+            if ((e.Key == Key.Left || e.Key == Key.A) && Canvas.GetLeft(car_player) > 110)
+                Canvas.SetLeft(car_player, Canvas.GetLeft(car_player) - speed_car);
+            else if ((e.Key == Key.Right || e.Key == Key.D) && Canvas.GetLeft(car_player) < 580)
+                Canvas.SetLeft(car_player, Canvas.GetLeft(car_player) + speed_car);
+
+            // выход
             if (e.Key == Key.Escape)
             {
-                Timer.Stop();
+                timer.Stop();
                 this.Close();
             }
         }
 
+        // перемещение окна мышкой 
         private void Cnv_MouseDown(object sender, MouseButtonEventArgs e) => DragMove();
     }
 }

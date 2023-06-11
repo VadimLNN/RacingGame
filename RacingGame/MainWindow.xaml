@@ -5,14 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RacingGame"
         mc:Ignorable="d"
-        Title="RacingGame" Height="650" Width="826"
+        Title="RacingGame" Height="638" Width="826"
         WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown" WindowStyle="None" ResizeMode="NoResize" Icon="/car_1.png">
 
     <Grid Height="655">
         <Canvas x:Name="cnv" MouseDown="Cnv_MouseDown">
-            <Image x:Name="bg_img_down" Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center"/>
-            <Image x:Name="bg_img_up" Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center" Canvas.Top="-636"/>
-            <Image x:Name="car" Height="128" Width="128" Source="/car_1.png" HorizontalAlignment="Center" Canvas.Left="542" Canvas.Top="495" VerticalAlignment="Top"/>
+            <Image x:Name="bg_img_up"   Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center" Canvas.Top="-640"/>
+            <Image x:Name="bg_img_down" Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center" Canvas.Top="0" VerticalAlignment="Top"/>
+            <Image x:Name="car_player" Height="128" Width="128" Source="/car_1.png" HorizontalAlignment="Center" Canvas.Left="542" Canvas.Top="495" VerticalAlignment="Top"/>
+            <Image x:Name="car_enemy_1"  Height="128" Width="128" Source="/car_2.png" Canvas.Left="165" Canvas.Top="-622" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Image x:Name="car_enemy_2"  Height="128" Width="128" Source="/car_2.png" Canvas.Left="542" Canvas.Top="-622" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </Canvas>
 
     </Grid>
