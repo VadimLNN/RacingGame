@@ -8,13 +8,19 @@
         Title="RacingGame" Height="638" Width="826"
         WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown" WindowStyle="None" ResizeMode="NoResize" Icon="/car_1.png">
 
-    <Grid Height="655">
+    <Grid x:Name="grd" Height="655">
         <Canvas x:Name="cnv" MouseDown="Cnv_MouseDown">
             <Image x:Name="bg_img_up"   Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center" Canvas.Top="-640"/>
             <Image x:Name="bg_img_down" Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center" Canvas.Top="0" VerticalAlignment="Top"/>
             <Image x:Name="car_player" Height="128" Width="128" Source="/car_1.png" HorizontalAlignment="Center" Canvas.Left="542" Canvas.Top="495" VerticalAlignment="Top"/>
+            <Rectangle x:Name="HitBoxCarPlayer" Height="128" Width="80" Canvas.Left="566" Canvas.Top="495" HorizontalAlignment="Left" VerticalAlignment="Center" Stroke="Black"/>
             <Image x:Name="car_enemy_1"  Height="128" Width="128" Source="/car_2.png" Canvas.Left="165" Canvas.Top="-622" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Rectangle x:Name="HitBoxCarEnemy_1" Height="128" Width="80" Canvas.Left="189" Stroke="Black" Canvas.Top="-622" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <Image x:Name="car_enemy_2"  Height="128" Width="128" Source="/car_2.png" Canvas.Left="542" Canvas.Top="-622" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Rectangle x:Name="HitBoxCarEnemy_2" Height="128" Width="80" Canvas.Left="566" Stroke="Black" Canvas.Top="-622" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label x:Name="boom" Content="NO" Canvas.Left="353" Canvas.Top="92" Height="102" Width="120" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+
         </Canvas>
 
     </Grid>
