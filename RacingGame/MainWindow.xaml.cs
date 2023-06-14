@@ -18,7 +18,9 @@ namespace RacingGame
 {
     public partial class MainWindow : Window
     {
+        // отслеживание состояния игрока
         bool lose = false;
+        // кол-во собранных монеток
         int coins = 0;
 
         // создание переменной Таймер
@@ -40,13 +42,13 @@ namespace RacingGame
             timer.Start();
         }
 
-        // переменная для установки сдвига задних фонов и машин врагов (для анимации)
+        // переменная для установки скорости заднего фона и машин врагов 
         int background_speed = 10;
-        int enemy1_car_speed = 8;
+        int enemy1_car_speed = 9;
         int enemy2_car_speed = 7;
         private void Tick(object sender, EventArgs e)
         {
-            // сдвиг нижнего и верхнего фона + движение врагов и монетки
+            // сдвиг нижнего, верхнего фона + движение врагов и монетки
             Canvas.SetTop( bg_img_down, (Canvas.GetTop(bg_img_down) + background_speed));
             Canvas.SetTop( bg_img_up,   (Canvas.GetTop(bg_img_up)   + background_speed));
 
@@ -148,15 +150,20 @@ namespace RacingGame
         }
 
         // перемещение окна мышкой 
-        private void Cnv_MouseDown(object sender, MouseButtonEventArgs e) => DragMove();
+        private void Cnv_MouseMoving(object sender, MouseButtonEventArgs e) => DragMove();
         private void restart_Click(object sender, RoutedEventArgs e)
         {
+            // перезапуск игры 
+
             RestartMovingEnemy(car_enemy_1, HitBoxCarEnemy_1, -340);
             RestartMovingEnemy(car_enemy_2, HitBoxCarEnemy_2, -150);
+
             gamover.Visibility = Visibility.Hidden;
             restart.Visibility = Visibility.Hidden;
+            
             timer.Start();
             lose = false;
+            
             coins = 0;
             CoinsScore.Content = $"Coins: {coins}";
             RestartMovingCoin(coin);
