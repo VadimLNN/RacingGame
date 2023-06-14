@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -38,15 +39,17 @@ namespace RacingGame
             timer.Start();
         }
 
-        // переменная для установки сдвига задних фонов и машин (для анимации)
+        // переменная для установки сдвига задних фонов и машин врагов (для анимации)
         int background_speed = 10;
         int enemy1_car_speed = 8;
         int enemy2_car_speed = 7;
         private void Tick(object sender, EventArgs e)
         {
-            // сдвиг нижнего и верхнего фона + движение врагов  
+            // сдвиг нижнего и верхнего фона + движение врагов и монетки
             Canvas.SetTop( bg_img_down, (Canvas.GetTop(bg_img_down) + background_speed));
             Canvas.SetTop( bg_img_up,   (Canvas.GetTop(bg_img_up)   + background_speed));
+
+            Canvas.SetTop(coin, (Canvas.GetTop(coin) + background_speed));
 
             Canvas.SetTop( car_enemy_1, (Canvas.GetTop(car_enemy_1) + enemy1_car_speed));
             Canvas.SetTop( HitBoxCarEnemy_1, (Canvas.GetTop(car_enemy_1) + enemy1_car_speed - 8));
@@ -54,12 +57,20 @@ namespace RacingGame
             Canvas.SetTop( car_enemy_2, (Canvas.GetTop(car_enemy_2) + enemy2_car_speed));
             Canvas.SetTop( HitBoxCarEnemy_2, (Canvas.GetTop(car_enemy_2) + enemy2_car_speed - 8));
 
-            // перезапуск анимации фона
+            // перезапуск анимации фона и генерация монетки
             if (Canvas.GetTop(bg_img_up) >= 0)  
                 Canvas.SetTop(bg_img_up, -640);
 
             if (Canvas.GetTop(bg_img_down) >= 640)
                 Canvas.SetTop(bg_img_down, 0);
+
+            if (Canvas.GetTop(coin) >= 640)
+            {
+                Random rand = new Random();
+                Canvas.SetLeft(coin, rand.Next(110, 580));
+                Canvas.SetTop(coin, -200);
+            }
+                
 
             // перезапуск движения врагов
             if (Canvas.GetTop(car_enemy_1) >= 640)
@@ -96,7 +107,6 @@ namespace RacingGame
             r1.Intersect(r2);
             return r1;
         }
-
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             // выход
@@ -128,7 +138,6 @@ namespace RacingGame
 
         // перемещение окна мышкой 
         private void Cnv_MouseDown(object sender, MouseButtonEventArgs e) => DragMove();
-
         private void restart_Click(object sender, RoutedEventArgs e)
         {
             RestarMovingEnemy(car_enemy_1, HitBoxCarEnemy_1, -340);
