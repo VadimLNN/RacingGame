@@ -13,12 +13,25 @@
             <Image x:Name="bg_img_up"   Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center" Canvas.Top="-640"/>
             <Image x:Name="bg_img_down" Height="650" Width="826" Source="/bg.png" HorizontalAlignment="Center" Canvas.Top="0" VerticalAlignment="Top"/>
             <Image x:Name="car_player" Height="128" Width="128" Source="/car_1.png" HorizontalAlignment="Center" Canvas.Left="542" Canvas.Top="495" VerticalAlignment="Top"/>
-            <Rectangle x:Name="HitBoxCarPlayer" Height="128" Width="80" Canvas.Left="566" Canvas.Top="495" HorizontalAlignment="Left" VerticalAlignment="Center" Stroke="Black"/>
-            <Image x:Name="car_enemy_1"  Height="128" Width="128" Source="/car_2.png" Canvas.Left="165" Canvas.Top="-622" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Rectangle x:Name="HitBoxCarEnemy_1" Height="128" Width="80" Canvas.Left="189" Stroke="Black" Canvas.Top="-622" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Image x:Name="car_enemy_2"  Height="128" Width="128" Source="/car_2.png" Canvas.Left="542" Canvas.Top="-622" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Rectangle x:Name="HitBoxCarEnemy_2" Height="128" Width="80" Canvas.Left="566" Stroke="Black" Canvas.Top="-622" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label x:Name="boom" Content="NO" Canvas.Left="353" Canvas.Top="92" Height="102" Width="120" FontSize="72" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Rectangle x:Name="HitBoxCarPlayer" Height="128" Width="80" Canvas.Left="566" Canvas.Top="495" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Rectangle.Stroke>
+                    <ImageBrush/>
+                </Rectangle.Stroke>
+            </Rectangle>
+            <Image x:Name="car_enemy_1"  Height="128" Width="128" Source="/car_2.png" Canvas.Left="165" Canvas.Top="-370" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Rectangle x:Name="HitBoxCarEnemy_1" Height="128" Width="80" Canvas.Left="189" Canvas.Top="-370" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Rectangle.Stroke>
+                    <ImageBrush/>
+                </Rectangle.Stroke>
+            </Rectangle>
+            <Image x:Name="car_enemy_2"  Height="128" Width="128" Source="/car_2.png" Canvas.Left="542" Canvas.Top="-250" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Rectangle x:Name="HitBoxCarEnemy_2" Height="128" Width="80" Canvas.Left="566" Canvas.Top="-250" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Rectangle.Stroke>
+                    <ImageBrush/>
+                </Rectangle.Stroke>
+            </Rectangle>
+            <Label x:Name="gamover" Content="Gameover" Canvas.Left="250" Canvas.Top="110" Height="106" Width="326" FontSize="72" Background="#FF793EFF" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontFamily="Yu Gothic Light" Visibility="Hidden"/>
+            <Button x:Name="restart" Content="Restart" Canvas.Left="323" Canvas.Top="263" Height="70" Width="180" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="48" FontFamily="Yu Gothic Light" Background="#FF793EFF" Click="restart_Click" Visibility="Hidden"/>
 
 
         </Canvas>

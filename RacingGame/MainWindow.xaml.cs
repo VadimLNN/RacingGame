@@ -17,6 +17,8 @@ namespace RacingGame
 {
     public partial class MainWindow : Window
     {
+        bool lose = false;
+
         // создание переменной Таймер
         System.Windows.Threading.DispatcherTimer timer;
         public MainWindow()
@@ -61,38 +63,32 @@ namespace RacingGame
 
             // перезапуск движения врагов
             if (Canvas.GetTop(car_enemy_1) >= 640)
-            {
-                Canvas.SetTop(car_enemy_1, -322);
-                Random rand = new Random();
-                Canvas.SetLeft(car_enemy_1, rand.Next(110, 580));
-
-                Canvas.SetTop(HitBoxCarEnemy_1, (Canvas.GetTop(car_enemy_1) + enemy1_car_speed - 8));
-                Canvas.SetLeft(HitBoxCarEnemy_1, (Canvas.GetLeft(car_enemy_1) + 24));
-            }
+                RestarMovingEnemy(car_enemy_1, HitBoxCarEnemy_1, -340);
 
             if (Canvas.GetTop(car_enemy_2) >= 640)
-            {
-                Canvas.SetTop(car_enemy_2, -322);
-                Random rand = new Random();
-                Canvas.SetLeft(car_enemy_2, rand.Next(110, 580));
-
-                Canvas.SetTop(HitBoxCarEnemy_2, (Canvas.GetTop(car_enemy_2) + enemy2_car_speed - 8));
-                Canvas.SetLeft(HitBoxCarEnemy_2, (Canvas.GetLeft(car_enemy_2) + 24));
-            }
+                RestarMovingEnemy(car_enemy_2, HitBoxCarEnemy_2, -150);
 
             // проверка на пересечение хитбоксов
             if (DetectCollisions(HitBoxCarPlayer, HitBoxCarEnemy_1) != Rect.Empty ||
                 DetectCollisions(HitBoxCarPlayer, HitBoxCarEnemy_2) != Rect.Empty)
             {
-                boom.Content = "YES";
-            }
-            else
-            {
-                boom.Content = "NO";
+                timer.Stop();
+                gamover.Visibility = Visibility.Visible;
+                restart.Visibility = Visibility.Visible;
+                lose = true;
             }
 
         }
+        
+        private void RestarMovingEnemy(Image car, Shape HitBox, int distantion)
+        {
+            Canvas.SetTop(car, distantion);
+            Random rand = new Random();
+            Canvas.SetLeft(car, rand.Next(110, 580));
 
+            Canvas.SetTop(HitBox, (Canvas.GetTop(car) + enemy1_car_speed - 8));
+            Canvas.SetLeft(HitBox, (Canvas.GetLeft(car) + 24));
+        }
         private Rect DetectCollisions(FrameworkElement rect1, FrameworkElement rect2)
         {
             var r1 = new Rect(Canvas.GetLeft(rect1), Canvas.GetTop(rect1), rect1.ActualWidth, rect1.ActualHeight);
@@ -101,13 +97,21 @@ namespace RacingGame
             return r1;
         }
 
-
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            // выход
+            if (e.Key == Key.Escape)
+            {
+                timer.Stop();
+                this.Close();
+            }
+
+            if (lose) return;
+
             // скорость перемещения машинки в стороны 
             int speed_car = 16;
 
-            // ограничения передвижения дорогой 
+            // передвижение машинки, ограниченные границами дороги
             if ((e.Key == Key.Left || e.Key == Key.A) && Canvas.GetLeft(car_player) > 110)
             {
                 Canvas.SetLeft(car_player, Canvas.GetLeft(car_player) - speed_car);
@@ -119,15 +123,20 @@ namespace RacingGame
                 Canvas.SetLeft(HitBoxCarPlayer, Canvas.GetLeft(car_player) - speed_car + 40);
             }
 
-            // выход
-            if (e.Key == Key.Escape)
-            {
-                timer.Stop();
-                this.Close();
-            }
+            
         }
 
         // перемещение окна мышкой 
         private void Cnv_MouseDown(object sender, MouseButtonEventArgs e) => DragMove();
+
+        private void restart_Click(object sender, RoutedEventArgs e)
+        {
+            RestarMovingEnemy(car_enemy_1, HitBoxCarEnemy_1, -340);
+            RestarMovingEnemy(car_enemy_2, HitBoxCarEnemy_2, -150);
+            gamover.Visibility = Visibility.Hidden;
+            restart.Visibility = Visibility.Hidden;
+            timer.Start();
+            lose = false;
+        }
     }
 }
