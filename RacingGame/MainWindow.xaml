@@ -33,6 +33,7 @@
             <Label x:Name="gamover" Content="Gameover" Canvas.Left="250" Canvas.Top="110" Height="106" Width="326" FontSize="72" Background="#FF793EFF" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontFamily="Yu Gothic Light" Visibility="Hidden"/>
             <Button x:Name="restart" Content="Restart" Canvas.Left="323" Canvas.Top="263" Height="70" Width="180" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="48" FontFamily="Yu Gothic Light" Background="#FF793EFF" Click="restart_Click" Visibility="Hidden"/>
             <Image x:Name="coin" Height="32" Canvas.Left="336" Canvas.Top="-230" Width="32" Source="/coin.png"/>
+            <Label x:Name="CoinsScore" Content="Coins:" Canvas.Left="10" Canvas.Top="10" Height="59" Width="165" FontSize="36" Background="#FF793EFF" Foreground="Black" FontFamily="Yu Gothic Light" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
 
 
         </Canvas>

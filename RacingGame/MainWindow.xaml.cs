@@ -19,6 +19,7 @@ namespace RacingGame
     public partial class MainWindow : Window
     {
         bool lose = false;
+        int coins = 0;
 
         // создание переменной Таймер
         System.Windows.Threading.DispatcherTimer timer;
@@ -65,19 +66,15 @@ namespace RacingGame
                 Canvas.SetTop(bg_img_down, 0);
 
             if (Canvas.GetTop(coin) >= 640)
-            {
-                Random rand = new Random();
-                Canvas.SetLeft(coin, rand.Next(110, 580));
-                Canvas.SetTop(coin, -200);
-            }
+                RestartMovingCoin(coin);
                 
 
             // перезапуск движения врагов
             if (Canvas.GetTop(car_enemy_1) >= 640)
-                RestarMovingEnemy(car_enemy_1, HitBoxCarEnemy_1, -340);
+                RestartMovingEnemy(car_enemy_1, HitBoxCarEnemy_1, -340);
 
             if (Canvas.GetTop(car_enemy_2) >= 640)
-                RestarMovingEnemy(car_enemy_2, HitBoxCarEnemy_2, -150);
+                RestartMovingEnemy(car_enemy_2, HitBoxCarEnemy_2, -150);
 
             // проверка на пересечение хитбоксов
             if (DetectCollisions(HitBoxCarPlayer, HitBoxCarEnemy_1) != Rect.Empty ||
@@ -89,9 +86,16 @@ namespace RacingGame
                 lose = true;
             }
 
+            // проверка на сбор монетки
+            if (DetectCollisions(HitBoxCarPlayer, coin) != Rect.Empty)
+            {
+                RestartMovingCoin(coin);
+                coins++;
+                CoinsScore.Content = $"Coins: {coins}";
+            }
         }
-        
-        private void RestarMovingEnemy(Image car, Shape HitBox, int distantion)
+
+        private void RestartMovingEnemy(Image car, Shape HitBox, int distantion)
         {
             Canvas.SetTop(car, distantion);
             Random rand = new Random();
@@ -100,6 +104,13 @@ namespace RacingGame
             Canvas.SetTop(HitBox, (Canvas.GetTop(car) + enemy1_car_speed - 8));
             Canvas.SetLeft(HitBox, (Canvas.GetLeft(car) + 24));
         }
+        private void RestartMovingCoin(Image coin)
+        {
+            Random rand = new Random();
+            Canvas.SetTop(coin, rand.Next(-630, -110));
+            Canvas.SetLeft(coin, rand.Next(110, 580));
+        }
+
         private Rect DetectCollisions(FrameworkElement rect1, FrameworkElement rect2)
         {
             var r1 = new Rect(Canvas.GetLeft(rect1), Canvas.GetTop(rect1), rect1.ActualWidth, rect1.ActualHeight);
@@ -140,12 +151,15 @@ namespace RacingGame
         private void Cnv_MouseDown(object sender, MouseButtonEventArgs e) => DragMove();
         private void restart_Click(object sender, RoutedEventArgs e)
         {
-            RestarMovingEnemy(car_enemy_1, HitBoxCarEnemy_1, -340);
-            RestarMovingEnemy(car_enemy_2, HitBoxCarEnemy_2, -150);
+            RestartMovingEnemy(car_enemy_1, HitBoxCarEnemy_1, -340);
+            RestartMovingEnemy(car_enemy_2, HitBoxCarEnemy_2, -150);
             gamover.Visibility = Visibility.Hidden;
             restart.Visibility = Visibility.Hidden;
             timer.Start();
             lose = false;
+            coins = 0;
+            CoinsScore.Content = $"Coins: {coins}";
+            RestartMovingCoin(coin);
         }
     }
 }
